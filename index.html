@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RK PRO BOT</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#07111b;color:white;
+ font-family:Arial,sans-serif;padding:18px;
+}
+header{
+ text-align:center;padding:20px;
+ border-bottom:1px solid #174b55;
+}
+.logo{
+ font-size:34px;font-weight:bold;
+ color:#35e9dc;text-shadow:0 0 15px #00cfc4;
+}
+.sub{color:#d6ad56;font-size:12px;letter-spacing:3px}
+.card{
+ background:#102331;border:1px solid #17616b;
+ border-radius:15px;padding:18px;margin:15px 0;
+}
+h3{color:#43e9dc;margin-top:0}
+.status{color:#f0c76b;font-weight:bold}
+button{
+ width:100%;padding:15px;border:0;
+ border-radius:10px;background:#13bdb3;
+ color:#001719;font-weight:bold;font-size:16px;
+ margin-top:12px;
+}
+select{
+ width:100%;padding:13px;background:#07111b;
+ color:white;border:1px solid #26727b;
+ border-radius:9px;margin-top:10px;
+}
+.signal{
+ text-align:center;font-size:34px;
+ font-weight:bold;color:#f4c75e;padding:15px;
+}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.small{color:#9bb3c0;font-size:13px}
+footer{text-align:center;color:#78909c;font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">RK PRO BOT</div>
+ <div class="sub">AI TRADING SCANNER</div>
+</header>
+
+<div class="card">
+ <h3>⚡ AI SCANNER</h3>
+ <p class="status" id="status">● SYSTEM READY</p>
+ <p class="small">Market analysis dashboard</p>
+ <button onclick="scan()">START SCANNER</button>
+</div>
+
+<div class="card">
+ <h3>SELECT MARKET</h3>
+ <select id="pair">
+  <option>EUR/USD</option>
+  <option>GBP/USD</option>
+  <option>USD/JPY</option>
+  <option>EUR/JPY</option>
+ </select>
+ <p class="small">Expiry Time</p>
+ <select id="expiry">
+  <option value="30">30 Seconds</option>
+ </select>
+ <p class="small">Mode: Demo Analysis Only</p>
+</div>
+
+<div class="card">
+ <h3>AI SIGNAL</h3>
+ <div class="signal" id="signal">WAIT</div>
+ <p class="small" style="text-align:center" id="detail">
+ Waiting for market data...
+ </p>
+</div>
+
+<div class="grid">
+ <div class="card">
+  <h3>CALL ↑</h3>
+  <p class="small">UP Signal</p>
+ </div>
+ <div class="card">
+  <h3>PUT ↓</h3>
+  <p class="small">DOWN Signal</p>
+ </div>
+</div>
+
+<div class="card">
+ <h3>📊 INDICATORS</h3>
+ <p>RSI: <span class="status">--</span></p>
+ <p>EMA: <span class="status">--</span></p>
+ <p>MACD: <span class="status">--</span></p>
+ <p class="small">Live market data not connected.</p>
+</div>
+
+<div class="card">
+ <h3>📜 SIGNAL HISTORY</h3>
+ <p class="small" id="history">No analysis yet.</p>
+</div>
+
+<footer>
+ RK PRO BOT © 2026<br>
+ Demo Analysis • Risk Management
+</footer>
+
+<script>
+function scan(){
+ const pair=document.getElementById("pair").value;
+ document.getElementById("status").innerText=
+ "● SCANNER STARTED";
+ document.getElementById("signal").innerText="WAIT";
+ document.getElementById("detail").innerText=
+ pair+" — Live data connection required.";
+ document.getElementById("history").innerText=
+ "Analysis requested for "+pair;
+}
+</script>
+
+</body>
+   </html>
