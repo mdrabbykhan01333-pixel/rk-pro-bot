@@ -1,0 +1,15 @@
+{
+  "name": "rk-pro-bot-pro-max",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Read-only real forex and Quotex OTC market scanner",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}

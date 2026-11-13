@@ -1,128 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RK PRO BOT</title>
+<!doctype html>
+<html lang="bn"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b12"><title>RK PRO BOT • PRO MAX</title>
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#07111b;color:white;
- font-family:Arial,sans-serif;padding:18px;
-}
-header{
- text-align:center;padding:20px;
- border-bottom:1px solid #174b55;
-}
-.logo{
- font-size:34px;font-weight:bold;
- color:#35e9dc;text-shadow:0 0 15px #00cfc4;
-}
-.sub{color:#d6ad56;font-size:12px;letter-spacing:3px}
-.card{
- background:#102331;border:1px solid #17616b;
- border-radius:15px;padding:18px;margin:15px 0;
-}
-h3{color:#43e9dc;margin-top:0}
-.status{color:#f0c76b;font-weight:bold}
-button{
- width:100%;padding:15px;border:0;
- border-radius:10px;background:#13bdb3;
- color:#001719;font-weight:bold;font-size:16px;
- margin-top:12px;
-}
-select{
- width:100%;padding:13px;background:#07111b;
- color:white;border:1px solid #26727b;
- border-radius:9px;margin-top:10px;
-}
-.signal{
- text-align:center;font-size:34px;
- font-weight:bold;color:#f4c75e;padding:15px;
-}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.small{color:#9bb3c0;font-size:13px}
-footer{text-align:center;color:#78909c;font-size:12px;padding:20px}
-</style>
-</head>
-<body>
-
-<header>
- <div class="logo">RK PRO BOT</div>
- <div class="sub">AI TRADING SCANNER</div>
-</header>
-
-<div class="card">
- <h3>⚡ AI SCANNER</h3>
- <p class="status" id="status">● SYSTEM READY</p>
- <p class="small">Market analysis dashboard</p>
- <button onclick="scan()">START SCANNER</button>
-</div>
-
-<div class="card">
- <h3>SELECT MARKET</h3>
- <select id="pair">
-  <option>EUR/USD</option>
-  <option>GBP/USD</option>
-  <option>USD/JPY</option>
-  <option>EUR/JPY</option>
- </select>
- <p class="small">Expiry Time</p>
- <select id="expiry">
-  <option value="30">30 Seconds</option>
- </select>
- <p class="small">Mode: Demo Analysis Only</p>
-</div>
-
-<div class="card">
- <h3>AI SIGNAL</h3>
- <div class="signal" id="signal">WAIT</div>
- <p class="small" style="text-align:center" id="detail">
- Waiting for market data...
- </p>
-</div>
-
-<div class="grid">
- <div class="card">
-  <h3>CALL ↑</h3>
-  <p class="small">UP Signal</p>
+:root{--bg:#080b12;--panel:#111a27;--line:#26364b;--muted:#91a2b9;--green:#20df75;--red:#ff665e;--cyan:#38d9d0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -20%,#1b2a42 0,#080b12 48%);color:#eef4ff;font:14px system-ui,Arial,sans-serif}
+header{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #263247;background:#0d121c;position:sticky;top:0;z-index:5}.brand{font-weight:900;font-size:19px}.brand span{color:var(--cyan)}.pill{font-size:11px;padding:5px 8px;border:1px solid #6b592d;color:#ffd477;border-radius:20px}
+main{max-width:1050px;margin:auto;padding:12px}.panel{background:linear-gradient(145deg,#121d30,#0e1625);border:1px solid var(--line);border-radius:13px;padding:13px;margin:10px 0}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.muted{color:var(--muted)}.small{font-size:12px}
+select,button{font:inherit;color:#eef4ff;background:#0b1421;border:1px solid #30415d;border-radius:9px;padding:10px;max-width:100%}button{cursor:pointer}.primary{background:#12b9ae;color:#041b1a;border:0;font-weight:800}.danger{background:#8c3039;color:white;border:0}.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.controls .panel{margin:0}.controls select,.controls button{width:100%}
+#chart{width:100%;height:300px;display:block;background:#0b1320;border-radius:9px;margin-top:10px}.signal{font-size:30px;font-weight:900}.call{color:var(--green)}.put{color:var(--red)}.wait{color:#ffd477}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric{background:#0b1421;border:1px solid #26364b;border-radius:9px;padding:10px}.metric small{display:block;color:var(--muted)}.metric b{display:block;margin-top:5px}
+.history{display:grid;gap:7px;margin-top:9px}.item{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:9px;background:#0b1421;border-radius:8px;font-size:12px}
+.notice{font-size:12px;line-height:1.55;color:#b8c5d8;background:#1b2434;border-left:3px solid #e4b653;border-radius:8px;padding:10px;margin:12px 0}
+@media(max-width:650px){.controls{grid-template-columns:1fr 1fr}.controls .wide{grid-column:1/-1}.metrics{grid-template-columns:repeat(2,1fr)}#chart{height:260px}header{padding:12px}.brand{font-size:17px}}
+</style></head><body>
+<header><div class="brand">RK PRO <span>BOT · PRO MAX</span></div><div class="pill" id="conn">CHECKING SERVER</div></header>
+<main>
+<section class="panel">
+ <div class="row"><div><b>MARKET SOURCE</b><div class="small muted">বাজারের ধরন নির্বাচন করুন</div></div><select id="venue"><option value="quotex">Quotex OTC / Demo feed</option><option value="forex">Real Forex market</option></select></div>
+ <div class="row" style="margin-top:12px"><div><b>SELECT ASSET</b><div class="small muted" id="assetInfo">ডাটা লোড হচ্ছে…</div></div><select id="symbol" style="max-width:60%"></select></div>
+</section>
+<section class="panel">
+ <div class="row"><div><b>LIVE PRICE CHART</b><div class="small muted" id="chartLabel">ডাটা সোর্সের অপেক্ষায়</div></div><span class="pill" id="tfLabel">30 SEC SIGNAL</span></div>
+ <canvas id="chart"></canvas>
+</section>
+<section class="controls">
+ <div class="panel"><label class="small muted">SIGNAL EXPIRY</label><select disabled><option>30 Seconds</option></select></div>
+ <div class="panel"><label class="small muted">SCAN INTERVAL</label><select disabled><option>30 Seconds</option></select></div>
+ <div class="panel wide"><label class="small muted">AUTO SCANNER</label><button class="primary" id="start">START AUTO SCANNER</button><button class="danger" id="stop" style="display:none">STOP SCANNER</button></div>
+</section>
+<section class="panel">
+ <div class="row"><div><b>AI SIGNAL</b><div class="small muted" id="signalMeta">প্রথমে মার্কেট নির্বাচন করুন</div></div><div class="signal wait" id="signal">WAIT</div></div>
+ <div class="metrics" style="margin-top:12px">
+  <div class="metric"><small>RSI (14)</small><b id="rsi">—</b></div><div class="metric"><small>EMA 9 / 21</small><b id="ema">—</b></div><div class="metric"><small>MACD</small><b id="macd">—</b></div><div class="metric"><small>CONFIDENCE SCORE</small><b id="confidence">—</b></div>
  </div>
- <div class="card">
-  <h3>PUT ↓</h3>
-  <p class="small">DOWN Signal</p>
- </div>
-</div>
-
-<div class="card">
- <h3>📊 INDICATORS</h3>
- <p>RSI: <span class="status">--</span></p>
- <p>EMA: <span class="status">--</span></p>
- <p>MACD: <span class="status">--</span></p>
- <p class="small">Live market data not connected.</p>
-</div>
-
-<div class="card">
- <h3>📜 SIGNAL HISTORY</h3>
- <p class="small" id="history">No analysis yet.</p>
-</div>
-
-<footer>
- RK PRO BOT © 2026<br>
- Demo Analysis • Risk Management
-</footer>
-
+ <p class="small muted" id="reason">লাইভ ডাটা সংযুক্ত হলে বিশ্লেষণ শুরু হবে।</p>
+</section>
+<section class="panel"><div class="row"><b>SIGNAL HISTORY</b><button id="clear" style="width:auto">CLEAR</button></div><div class="history" id="history"><div class="small muted">এখনো কোনো সিগন্যাল নেই।</div></div></section>
+<div class="notice"><b>গুরুত্বপূর্ণ:</b> Real Forex ও Quotex OTC আলাদা price feed; OTC দাম আসল Forex দামের সমান নয়। Quotex-এর নিজস্ব official public API নেই। এই অ্যাপটি read-only third-party market-data provider ব্যবহার করে, কোনো Quotex login/SSID নেয় না এবং trade execute করে না। Confidence score হলো indicator agreement, win probability বা 70–80% accuracy-র প্রতিশ্রুতি নয়। লাইভ ফলাফল ব্যাকটেস্ট ও forward-test করে যাচাই না করা পর্যন্তเงินจริงে ব্যবহার করবেন না।</div>
+</main>
 <script>
-function scan(){
- const pair=document.getElementById("pair").value;
- document.getElementById("status").innerText=
- "● SCANNER STARTED";
- document.getElementById("signal").innerText="WAIT";
- document.getElementById("detail").innerText=
- pair+" — Live data connection required.";
- document.getElementById("history").innerText=
- "Analysis requested for "+pair;
-}
-</script>
-
-</body>
-   </html>
+const $=id=>document.getElementById(id),canvas=$("chart"),ctx=canvas.getContext("2d");
+let venue="quotex",symbol="",symbols=[],bars=[],liveBar=null,source=null,scanTimer=null,running=false,history=[];
+async function getJSON(url){const r=await fetch(url);const j=await r.json();if(!r.ok)throw Error(j.error||j.detail||"Request failed");return j;}
+function status(t){$("conn").textContent=t;}
+async function init(){try{const s=await getJSON("/api/status");if(!s.configured){status("API KEY REQUIRED");$("assetInfo").textContent="সার্ভারে API key সেট করা নেই";return;}status("SERVER READY");await loadSymbols();}catch(e){status("SERVER ERROR");$("assetInfo").textContent=e.message;}}
+async function loadSymbols(){closeStream();venue=$("venue").value;bars=[];liveBar=null;$("symbol").innerHTML="";try{const data=await getJSON("/api/symbols?venue="+venue);symbols=data.symbols||[];if(!symbols.length)throw Error("এই প্ল্যানে কোনো asset পাওয়া যায়নি");symbols.forEach(x=>{const o=document.createElement("option");o.value=x.symbol;o.textContent=(x.name||x.symbol)+(x.open===false?" · CLOSED":"");$("symbol").append(o);});$("assetInfo").textContent=symbols.length+"টি উপলভ্য asset · provider catalogue";symbol=$("symbol").value;await loadCandles();if(running)connectStream();}catch(e){status("DATA ERROR");$("assetInfo").textContent=e.message;}}
+async function loadCandles(){symbol=$("symbol").value;if(!symbol)return;try{const d=await getJSON("/api/candles?venue="+venue+"&symbol="+encodeURIComponent(symbol));bars=(d.candles||[]).map(c=>({o:+c.open,h:+c.high,l:+c.low,c:+c.close,t:+c.time}));liveBar=null;draw();$("chartLabel").textContent=venue==="quotex"?"Quotex feed · 30s candles":"Real Forex feed · 1m candles";if(running)connectStream();}catch(e){status("CANDLE ERROR");$("reason").textContent=e.message;}}
+function closeStream(){if(source){source.close();source=null;}}
+function connectStream(){closeStream();if(!running||!symbol)return;source=new EventSource("/api/stream?venue="+venue+"&symbol="+encodeURIComponent(symbol));source.onopen=()=>status("LIVE STREAM CONNECTED");source.onerror=()=>status("STREAM RECONNECTING");source.addEventListener("tick",ev=>{try{const tick=JSON.parse(ev.data);if(tick.symbol!==symbol)return;const sec=venue==="quotex"?30:60,slot=Math.floor(Number(tick.time)/sec)*sec,p=Number(tick.price);if(!Number.isFinite(p))return;if(!liveBar||liveBar.t!==slot){if(liveBar)bars.push(liveBar);liveBar={o:p,h:p,l:p,c:p,t:slot};if(bars.length>180)bars.shift();}else{liveBar.h=Math.max(liveBar.h,p);liveBar.l=Math.min(liveBar.l,p);liveBar.c=p;}draw();}catch{}});}
+function closes(){const a=bars.map(b=>b.c);if(liveBar)a.push(liveBar.c);return a;}
+function ema(a,n){if(a.length<n)return null;let k=2/(n+1),v=a[0];for(let i=1;i<a.length;i++)v=a[i]*k+v*(1-k);return v;}
+function rsi(a,n=14){if(a.length<n+1)return null;let g=0,l=0;for(let i=a.length-n;i<a.length;i++){let d=a[i]-a[i-1];if(d>0)g+=d;else l-=d;}if(!l)return 100;return 100-100/(1+g/l);}
+function analyze(){const a=closes();if(a.length<35){$("reason").textContent="পর্যাপ্ত candle data নেই; অন্তত ৩৫টি candle দরকার।";return;}const r=rsi(a),e9=ema(a.slice(-40),9),e21=ema(a.slice(-40),21),mline=ema(a.slice(-40),12)-ema(a.slice(-40),26),prevMacd=[];for(let i=Math.max(26,a.length-12);i<a.length;i++){let z=a.slice(0,i+1);prevMacd.push(ema(z,12)-ema(z,26));}const ms=ema(prevMacd,9),macdUp=mline>ms,trend=e9>e21,mom=a.at(-1)>a.at(-2);let votes=(trend?1:0)+(macdUp?1:0)+(mom?1:0)+(r>50?1:0);let sig=votes>=3?"CALL":votes<=1?"PUT":"WAIT";let score=sig==="WAIT"?50:Math.round(55+Math.max(votes,4-votes)*7.5);score=Math.min(score,85);$("signal").textContent=sig==="CALL"?"CALL ↑":sig==="PUT"?"PUT ↓":"WAIT";$("signal").className="signal "+sig.toLowerCase();$("rsi").textContent=r.toFixed(1);$("ema").textContent=trend?"9 > 21":"9 < 21";$("macd").textContent=macdUp?"Bullish":"Bearish";$("confidence").textContent=score+"%";$("signalMeta").textContent=symbol+" · "+new Date().toLocaleTimeString()+" · "+(venue==="quotex"?"Quotex OTC":"Real Forex");$("reason").textContent="Indicator agreement "+votes+"/4. Confidence score indicator confluence only; এটি historical win-rate নয়।";if(sig!=="WAIT"){history.unshift({sig,symbol,venue,time:new Date().toLocaleTimeString(),score});history=history.slice(0,40);renderHistory();}}
+function renderHistory(){$("history").innerHTML=history.length?history.map(x=>`<div class="item"><b class="${x.sig.toLowerCase()}">${x.sig}</b><span>${x.symbol}</span><span>${x.venue}</span><span>${x.score}%</span><span class="muted">${x.time}</span></div>`).join(""):'<div class="small muted">এখনো কোনো সিগন্যাল নেই।</div>';}
+function draw(){let dpr=devicePixelRatio||1,w=canvas.clientWidth,h=canvas.clientHeight;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);let a=bars.slice(-70).concat(liveBar?[liveBar]:[]);if(!a.length){ctx.fillStyle="#91a2b9";ctx.fillText("Waiting for market candles…",15,30);return;}let vals=a.flatMap(x=>[x.h,x.l]),mn=Math.min(...vals),mx=Math.max(...vals),pad=(mx-mn)*.1||.0001;mn-=pad;mx+=pad;ctx.strokeStyle="#233249";for(let j=1;j<5;j++){ctx.beginPath();ctx.moveTo(0,h*j/5);ctx.lineTo(w,h*j/5);ctx.stroke();}let slot=w/a.length,cw=Math.max(2,slot*.58),y=v=>h-(v-mn)/(mx-mn)*h;a.forEach((c,i)=>{let x=i*slot+slot/2,col=c.c>=c.o?"#20df75":"#ff665e";ctx.strokeStyle=col;ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(x,y(c.h));ctx.lineTo(x,y(c.l));ctx.stroke();let top=y(Math.max(c.o,c.c)),bot=y(Math.min(c.o,c.c));ctx.fillRect(x-cw/2,top,cw,Math.max(2,bot-top));});}
+function start(){if(running)return;running=true;$("start").style.display="none";$("stop").style.display="block";if(!bars.length)loadCandles().then(connectStream);else connectStream();analyze();scanTimer=setInterval(analyze,30000);}
+function stop(){running=false;clearInterval(scanTimer);scanTimer=null;closeStream();$("start").style.display="block";$("stop").style.display="none";status("SCANNER STOPPED");}
+$("venue").onchange=loadSymbols;$("symbol").onchange=async()=>{symbol=$("symbol").value;await loadCandles();if(running)connectStream();};$("start").onclick=start;$("stop").onclick=stop;$("clear").onclick=()=>{history=[];renderHistory();};window.onresize=draw;init();
+</script></body></html>
