@@ -6,7 +6,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 const API_KEY = process.env.OTCHARTS_API_KEY;
 const BASE = "https://otcharts.com";
-const PUBLIC = path.join(__dirname, "public");
+const PUBLIC = __dirname;
 
 function send(res, status, body, type="application/json; charset=utf-8") {
   res.writeHead(status, {"Content-Type": type, "Access-Control-Allow-Origin": "*", "Cache-Control":"no-store"});
